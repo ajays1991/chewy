@@ -43,6 +43,13 @@ module Chewy
           match = regexp ? args.first.source : args.first
           path = match.include?(regexp ? '\.' : '.')
 
+          unless options[:unmatch].nil?
+            unmatch = options[:unmatch]
+            path_unmatch = unmatch.include?('.')
+            template[template_name][path_unmatch ? :path_unmatch : :unmatch] = unmatch
+            options.delete(:unmatch)
+          end
+
           template[template_name][path ? :path_match : :match] = match
           @dynamic_templates.push(template)
         else
