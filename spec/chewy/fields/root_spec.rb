@@ -12,7 +12,9 @@ describe Chewy::Fields::Root do
       field.dynamic_template(/hello.*/)
       field.dynamic_template template_42: {mapping: {}, match: ''}
       field.dynamic_template(/hello\..*/)
-
+      field.dynamic_template unmatch_template: {mapping: {}, match: 'field', unmatch: '*_long' }
+      field.dynamic_template path_unmatch_template: {mapping: {}, match: 'field', path_unmatch: '.next_field' }
+    
       expect(field.mappings_hash).to eq(product: {dynamic_templates: [
         {template_1: {mapping: {type: 'string'}, match: 'hello'}},
         {template_2: {mapping: {}, match_mapping_type: 'integer', match: 'hello*'}},
@@ -20,7 +22,9 @@ describe Chewy::Fields::Root do
         {template_4: {mapping: {}, match: 'hello', match_pattern: 'regexp'}},
         {template_5: {mapping: {}, match: 'hello.*', match_pattern: 'regexp'}},
         {template_42: {mapping: {}, match: ''}},
-        {template_7: {mapping: {}, path_match: 'hello\..*', match_pattern: 'regexp'}}
+        {template_7: {mapping: {}, path_match: 'hello\..*', match_pattern: 'regexp'}},
+        {unmatch_template: {mapping: {}, match: 'field', unmatch: '*_long'}},
+        {path_unmatch_template: {mapping: {}, match: 'field', path_unmatch: '.next_field'}}
       ]})
     end
 
@@ -28,7 +32,7 @@ describe Chewy::Fields::Root do
       subject(:field) do
         described_class.new('product', dynamic_templates: [
           {template_42: {mapping: {}, match: ''}}
-        ])
+        ])classify { |e|  }
       end
 
       specify do
