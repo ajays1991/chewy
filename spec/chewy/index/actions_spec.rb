@@ -545,23 +545,5 @@ describe Chewy::Index::Actions do
         expect(Chewy.client.search(index: 'dummies_2015')['hits']['total']).to eq(2)
       end
     end
-
-    context 'reindexing a index should apply new settings for the index settings' do 
-      # describe Chewy::Type::Mapping do
-      #   let(:dummy) { DummiesIndex::Dummy }
-      #   Chewy.client.index index: 'dummies', type: 'dummy', id: 1, body: { title: "TEST 1"}
-      #   Chewy.client.index index: 'dummies', type: 'dummy', id: 1, body: { title: "TEST 2"}
-      #   Chewy.client.indices.refresh index: 'dummies'
-      # end
-      # specify { expect(Chewy.client.indices.exists(index: 'dummies')).to eq(true) }
-      # specify { expect(DummiesIndex.aliases).to eq([]) }
-      # specify do 
-      #   DummiesIndex.reindex('2015')
-      #   expect(Chewy.client.indices.exists(index: 'dummies_2015')).to eq(true)
-      #   expect(Chewy.client.indices.exists(index: 'dummies_2013')).to eq(false)
-      #   expect(Chewy.client.search(index: 'dummies')['hits']['total']).to eq(2)
-      #   expect(Chewy.client.search(index: 'dummies_2015')['hits']['total']).to eq(2)
-      # end
-    end
   end
 end
